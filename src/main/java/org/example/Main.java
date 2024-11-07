@@ -1,14 +1,47 @@
-package org.example;
+package se.lexicon;
 
-public class Main {
-    public static void main(String[] args) {
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-        System.out.println("Currency Converter App");
-        System.out.println(" 1. Convert SEK to USD");
-        System.out.println(" 2. Convert USD to SEK");
-        System.out.println(" 3. Convert SEK to EURO");
-        System.out.println(" 4. Convert EURO to SEK");
-        System.out.println("exit (Exit the Converter)");
-        System.out.println("==========================");
-        }
+public class CurrencyConverter {
+    private static final double SEK_TO_USD_RATE = 0.10;
+    private static final double USD_TO_SEK_RATE = 9.96;
+    private static final double SEK_TO_EURO_RATE = 0.09;
+    private static final double EURO_TO_SEK_RATE = 10.98;
+    private static final double USD_TO_EURO_RATE = 0.91;
+    private static final double EURO_TO_USD_RATE = 1.10;
+
+    public double convertSEKtoUSD(double amount) {
+        return formatOutput(amount * SEK_TO_USD_RATE);
     }
+
+    public double convertUSDtoSEK(double amount) {
+        return formatOutput(amount * USD_TO_SEK_RATE);
+    }
+
+    public double convertSEKtoEuro(double amount) {
+        return formatOutput(amount * SEK_TO_EURO_RATE);
+    }
+
+    public double convertEuroToSEK(double amount) {
+        return formatOutput(amount * EURO_TO_SEK_RATE);
+    }
+
+    public double convertUSDtoEuro(double amount) {
+        return formatOutput(amount * USD_TO_EURO_RATE);
+    }
+
+    public double convertEuroToUSD(double amount) {
+        return formatOutput(amount * EURO_TO_USD_RATE);
+    }
+
+    private double formatOutput(double amount) {
+        return Math.round(amount * 100.0) / 100.0;
+    }
+
+    public String getCurrentDateTime() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
+    }
+}
